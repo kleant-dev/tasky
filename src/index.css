@@ -7,4 +7,120 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  height: 1024px;
+  width: 1440px;
+  background-color: #ffff;
+}
+
+.logo-container {
+  height: 100px;
+  background-color: #f1ece6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  width: 230.77px;
+  height: 60px;
+}
+
+.todo-type-container {
+  display: flex;
+}
+
+.todo-type {
+  width: 50%;
+  height: 73px;
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #969696;
+}
+.active {
+  color: #323232;
+  border-bottom: 5px solid #d98326;
+}
+
+.todo-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.todo-input {
+  width: 1005px;
+  height: 48px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 35px;
+  border: none;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: #f1ece6;
+  outline: none;
+}
+.todo-input::placeholder {
+  font-size: 32px;
+}
+
+.todo-input-button {
+  height: 78px;
+  width: 140px;
+  border: none;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.todos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1040px;
+  height: 589px;
+  background-color: #f1ece6;
+  border-radius: 50px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 945px;
+  height: 88px;
+  border-bottom: 1px solid #76b7cd;
+}
+.radio-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.unchecked-radio {
+  width: 64px;
+  height: 64px;
+}
+.todo-title {
+  font-weight: 400;
+  font-size: 32px;
+  color: #323232;
+}
+
+.delete-btn {
+  height: 32px;
+  width: 32px;
 }
