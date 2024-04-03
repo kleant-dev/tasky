@@ -1,20 +1,36 @@
 import React from "react";
+import { useTodos } from "../context/TodosContext";
 
-export default function TodoItem() {
+export default function TodoItem({ id, title, finished }) {
+  const { dispatch } = useTodos();
   return (
     <div className="todo-item">
       <div className="radio-title">
-        <img
-          src="/src/assets/Radio button unchecked.svg"
-          alt="radio button"
-          className="unchecked-radio"
-        />
-        <h3 className="todo-title">Some text nr.2</h3>
+        {!finished ? (
+          <img
+            src="/src/assets/Radio button unchecked.svg"
+            alt="radio button"
+            className="radio"
+            onClick={() => dispatch({ type: "todos/finishTodo", payload: id })}
+          />
+        ) : (
+          <img
+            src="/src/assets/Check circle outline.svg"
+            alt="radio button"
+            className="radio"
+            onClick={() =>
+              dispatch({ type: "todos/reverseFinishTodo", payload: id })
+            }
+          />
+        )}
+
+        <h3 className="todo-title">{title}</h3>
       </div>
       <img
         src="/src/assets/Delete outline.svg"
         alt="delete"
         className="delete-btn"
+        onClick={() => dispatch({ type: "todos/deleteTodo", payload: id })}
       />
     </div>
   );

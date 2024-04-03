@@ -1,17 +1,18 @@
 import Form from "./components/Form";
 import Logo from "./components/Logo";
 import TodoList from "./components/TodoList";
+import TodoType from "./components/TodoType";
+import TodosProvider from "./context/TodosContext";
 
 function App() {
   return (
-    <div class="app">
+    <div className="app">
       <Logo />
-      <div className="todo-type-container">
-        <div className="todo-type active">Personal</div>
-        <div className="todo-type">Professional</div>
-      </div>
-      <Form />
-      <TodoList />
+      <TodosProvider>
+        <TodoType />
+        <Form />
+        <TodoList />
+      </TodosProvider>
     </div>
   );
 }
