@@ -3,28 +3,50 @@ import TodoItem from "./TodoItem";
 import { useTodos } from "../context/TodosContext";
 
 export default function TodoList() {
-  const { todos, dispatch } = useTodos();
+  const { todos, proTodos, dispatch, todoType } = useTodos();
   return (
     <div className="container">
-      <div className="todos-container">
-        {todos.length > 0 &&
-          todos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              title={todo.title}
-              finished={todo.finished}
-              id={todo.id}
+      {todoType === "personal" ? (
+        <div className="todos-container">
+          {todos.length > 0 &&
+            todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                title={todo.title}
+                finished={todo.finished}
+                id={todo.id}
+              />
+            ))}
+          {todos.some((todo) => todo.finished) && (
+            <img
+              src="/src/assets/Clear complete.svg"
+              alt="clear completed"
+              className="clear-btn"
+              onClick={() => dispatch({ type: "todos/deleteFinished" })}
             />
-          ))}
-        {todos.some((todo) => todo.finished) && (
-          <img
-            src="/src/assets/Clear complete.svg"
-            alt="clear completed"
-            className="clear-btn"
-            onClick={() => dispatch({ type: "todos/deleteFinished" })}
-          />
-        )}
-      </div>
+          )}
+        </div>
+      ) : (
+        <div className="todos-container">
+          {proTodos.length > 0 &&
+            proTodos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                title={todo.title}
+                finished={todo.finished}
+                id={todo.id}
+              />
+            ))}
+          {proTodos.some((todo) => todo.finished) && (
+            <img
+              src="/src/assets/Clear complete.svg"
+              alt="clear completed"
+              className="clear-btn"
+              onClick={() => dispatch({ type: "todos/deleteFinished" })}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -129,7 +129,10 @@
   font-size: 32px;
   color: #323232;
 }
-
+.finished {
+  color: #c2c2c2;
+  text-decoration: line-through;
+}
 .delete-btn {
   height: 32px;
   width: 32px;

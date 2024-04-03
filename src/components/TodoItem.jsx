@@ -24,7 +24,7 @@ export default function TodoItem({ id, title, finished }) {
           />
         )}
 
-        <h3 className="todo-title">{title}</h3>
+        <h3 className={`todo-title ${finished ? "finished" : ""}`}>{title}</h3>
       </div>
       <img
         src="/src/assets/Delete outline.svg"

@@ -5,6 +5,7 @@ const TodosContext = createContext();
 const initialState = {
   todoType: "personal",
   todos: [],
+  proTodos: [],
 };
 
 function reducer(state, action) {
@@ -12,47 +13,82 @@ function reducer(state, action) {
     case "todos/setType":
       return { ...state, todoType: action.payload };
     case "todos/addTodo":
-      return { ...state, todos: [...state.todos, action.payload] };
+      if (state.todoType === "personal")
+        return { ...state, todos: [...state.todos, action.payload] };
+      else return { ...state, proTodos: [...state.proTodos, action.payload] };
     case "todos/finishTodo":
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.payload) return { ...todo, finished: true };
-          else return todo;
-        }),
-      };
+      if (state.todoType === "personal")
+        return {
+          ...state,
+          todos: state.todos.map((todo) => {
+            if (todo.id === action.payload) return { ...todo, finished: true };
+            else return todo;
+          }),
+        };
+      else
+        return {
+          ...state,
+          proTodos: state.proTodos.map((todo) => {
+            if (todo.id === action.payload) return { ...todo, finished: true };
+            else return todo;
+          }),
+        };
     case "todos/reverseFinishTodo":
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.payload) return { ...todo, finished: false };
-          else return todo;
-        }),
-      };
+      if (state.todoType === "personal")
+        return {
+          ...state,
+          todos: state.todos.map((todo) => {
+            if (todo.id === action.payload) return { ...todo, finished: false };
+            else return todo;
+          }),
+        };
+      else
+        return {
+          ...state,
+          proTodos: state.proTodos.map((todo) => {
+            if (todo.id === action.payload) return { ...todo, finished: false };
+            else return todo;
+          }),
+        };
     case "todos/deleteTodo":
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
+      if (state.todoType === "personal")
+        return {
+          ...state,
+          todos: state.todos.filter((todo) => todo.id !== action.payload),
+        };
+      else
+        return {
+          ...state,
+          proTodos: state.proTodos.filter((todo) => todo.id !== action.payload),
+        };
     case "todos/deleteFinished":
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => !todo.finished),
-      };
+      if (state.todoType === "personal")
+        return {
+          ...state,
+          todos: state.todos.filter((todo) => !todo.finished),
+        };
+      else
+        return {
+          ...state,
+          proTodos: state.proTodos.filter((todo) => !todo.finished),
+        };
   }
 }
 
 export default function TodosProvider({ children }) {
-  const [{ todoType, todos }, dispatch] = useReducer(reducer, initialState);
+  const [{ todoType, todos, proTodos }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
   return (
-    <TodosContext.Provider value={{ todos, todoType, dispatch }}>
+    <TodosContext.Provider value={{ todos, todoType, proTodos, dispatch }}>
       {children}
     </TodosContext.Provider>
   );
 }
 
 export function useTodos() {
-  const { todos, todoType, dispatch } = useContext(TodosContext);
+  const { todos, proTodos, todoType, dispatch } = useContext(TodosContext);
   if (!todos) throw new Error("Used out of provider");
-  return { todos, todoType, dispatch };
+  return { todos, proTodos, todoType, dispatch };
 }
