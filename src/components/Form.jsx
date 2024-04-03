@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTodos } from "../context/TodosContext";
 export default function Form() {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const { dispatch, todos, proTodos } = useTodos();
   function handleSubmit(e) {
     e.preventDefault();
