@@ -1,8 +1,9 @@
 import React from "react";
-import { useTodos } from "../context/TodosContext";
+import { useDispatch } from "react-redux";
+import { deleteTodo, finishTodo, reverseFinishTodo } from "./todosSlice";
 
 export default function TodoItem({ id, title, finished }) {
-  const { dispatch } = useTodos();
+  const dispatch = useDispatch();
   return (
     <div className="todo-item">
       <div className="radio-title">
@@ -11,16 +12,14 @@ export default function TodoItem({ id, title, finished }) {
             src="/src/assets/Radio button unchecked.svg"
             alt="radio button"
             className="radio"
-            onClick={() => dispatch({ type: "todos/finishTodo", payload: id })}
+            onClick={() => dispatch(finishTodo(id))}
           />
         ) : (
           <img
             src="/src/assets/Check circle outline.svg"
             alt="radio button"
             className="radio"
-            onClick={() =>
-              dispatch({ type: "todos/reverseFinishTodo", payload: id })
-            }
+            onClick={() => dispatch(reverseFinishTodo(id))}
           />
         )}
 
@@ -30,7 +29,7 @@ export default function TodoItem({ id, title, finished }) {
         src="/src/assets/Delete outline.svg"
         alt="delete"
         className="delete-btn"
-        onClick={() => dispatch({ type: "todos/deleteTodo", payload: id })}
+        onClick={() => dispatch(deleteTodo(id))}
       />
     </div>
   );

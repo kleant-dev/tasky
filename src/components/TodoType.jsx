@@ -1,19 +1,19 @@
-import { useTodos } from "../context/TodosContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setType } from "./todosSlice";
 
 function TodoType() {
-  const { todoType, dispatch } = useTodos();
+  const dispatch = useDispatch();
+  const { todoType } = useSelector((store) => store.todos);
   return (
     <div className="todo-type-container">
       <div
-        onClick={() => dispatch({ type: "todos/setType", payload: "personal" })}
+        onClick={() => dispatch(setType("personal"))}
         className={`todo-type ${todoType === "personal" ? "active" : ""}`}
       >
         Personal
       </div>
       <div
-        onClick={() =>
-          dispatch({ type: "todos/setType", payload: "professional" })
-        }
+        onClick={() => dispatch(setType("professional"))}
         className={`todo-type ${todoType === "professional" ? "active" : ""}`}
       >
         Professional

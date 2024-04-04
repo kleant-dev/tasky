@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import TodoItem from "./TodoItem";
-import { useTodos } from "../context/TodosContext";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFinished } from "./todosSlice";
 
 export default function TodoList() {
-  const { todos, proTodos, dispatch, todoType } = useTodos();
+  const dispatch = useDispatch();
+  const { todos, proTodos, todoType } = useSelector((store) => store.todos);
   useEffect(() => {
     localStorage.clear();
     localStorage.setItem(
@@ -11,6 +13,7 @@ export default function TodoList() {
       JSON.stringify({ personalTodos: todos, proTodos })
     );
   }, [todos, proTodos]);
+  console.log(todos);
   return (
     <div className="container">
       {todoType === "personal" ? (
@@ -32,7 +35,7 @@ export default function TodoList() {
               src="/src/assets/Clear complete.svg"
               alt="clear completed"
               className="clear-btn"
-              onClick={() => dispatch({ type: "todos/deleteFinished" })}
+              onClick={() => dispatch(deleteFinished())}
             />
           )}
         </div>
@@ -55,7 +58,7 @@ export default function TodoList() {
               src="/src/assets/Clear complete.svg"
               alt="clear completed"
               className="clear-btn"
-              onClick={() => dispatch({ type: "todos/deleteFinished" })}
+              onClick={() => dispatch(deleteFinished())}
             />
           )}
         </div>

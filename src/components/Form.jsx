@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { useTodos } from "../context/TodosContext";
+import { addTodo } from "./todosSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Form() {
   const [title, setTitle] = useState("");
-  const { dispatch, todos, proTodos } = useTodos();
+  const dispatch = useDispatch();
+  const { todos, proTodos } = useSelector((store) => store.todos);
   function handleSubmit(e) {
     e.preventDefault();
     if (title.length < 5) return;
@@ -11,7 +14,7 @@ export default function Form() {
       title,
       finished: false,
     };
-    dispatch({ type: "todos/addTodo", payload: todo });
+    dispatch(addTodo(todo));
     setTitle("");
   }
   return (

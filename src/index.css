@@ -45,6 +45,10 @@
   font-weight: 600;
   color: #969696;
 }
+.todo-type:hover {
+  cursor: pointer;
+  background-color: #e8e7e7;
+}
 .active {
   color: #323232;
   border-bottom: 5px solid #d98326;
@@ -84,11 +88,19 @@
   font-weight: 600;
   color: white;
 }
+
+.todo-input-button:hover {
+  cursor: pointer;
+  background-color: #7bc9e2;
+}
 .clear-btn {
   align-self: flex-end;
   margin-right: 75px;
 }
 
+.clear-btn:hover {
+  cursor: pointer;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -136,4 +148,10 @@
 .delete-btn {
   height: 32px;
   width: 32px;
+  transition-duration: 0.5s;
+}
+.delete-btn:hover {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
 }
