@@ -1,11 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
 
 const TodosContext = createContext();
-
+const { personalTodos, proTodos } = JSON.parse(localStorage.getItem("todos"));
 const initialState = {
   todoType: "personal",
-  todos: [],
-  proTodos: [],
+  todos: personalTodos,
+  proTodos: proTodos,
 };
 
 function reducer(state, action) {
